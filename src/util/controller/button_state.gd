@@ -16,3 +16,8 @@ func is_pressed():
 	return pressed
 func stale():
 	just_updated = false
+
+func press():
+	set_pressed(true)
+func release():
+	set_pressed(false)
