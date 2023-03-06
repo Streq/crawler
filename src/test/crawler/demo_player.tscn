@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/player/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/icon.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://src/test/crawler/aim_line.gd" type="Script" id=9]
 [ext_resource path="res://src/test/crawler/trajectory_line.gd" type="Script" id=10]
 [ext_resource path="res://assets/texture/scope_line.png" type="Texture" id=11]
+[ext_resource path="res://src/test/crawler/rope.gd" type="Script" id=12]
+[ext_resource path="res://assets/texture/thin_scope_line.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -64,9 +66,16 @@ speed = 200.0
 [node name="aim_line" type="Node2D" parent="jump"]
 script = ExtResource( 9 )
 
+[node name="Line2D2" type="Line2D" parent="jump/aim_line"]
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 20.0
+default_color = Color( 0.470588, 1, 0.541176, 1 )
+texture = ExtResource( 13 )
+texture_mode = 1
+
 [node name="Line2D" type="Line2D" parent="jump/aim_line"]
 points = PoolVector2Array( 0, 0, 0, 0 )
-width = 2.0
+width = 1.5
 default_color = Color( 0.470588, 1, 0.541176, 1 )
 
 [node name="arc_line" type="Node2D" parent="jump"]
@@ -95,6 +104,14 @@ width = 2.0
 default_color = Color( 1, 0.960784, 0, 1 )
 script = ExtResource( 10 )
 
-[node name="rope" type="Node2D" parent="."]
+[node name="rope_shooter" type="Node2D" parent="."]
+
+[node name="rope" type="Node2D" parent="rope_shooter"]
+script = ExtResource( 12 )
+
+[node name="hook" type="Node2D" parent="rope_shooter/rope"]
+unique_name_in_owner = true
 
 [connection signal="pre_move" from="." to="jump" method="process"]
+[connection signal="jump" from="jump" to="jump/aim_line" method="hide"]
+[connection signal="jump" from="jump" to="jump/arc_line" method="hide"]

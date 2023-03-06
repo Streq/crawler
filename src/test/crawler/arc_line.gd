@@ -7,7 +7,7 @@ export var disabled := false
 var points := []
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !get_parent().can_jump:
 		hide()
 		return
@@ -36,10 +36,10 @@ func update_points():
 			
 			if get_world_2d().direct_space_state.intersect_shape(params):
 				done = true
-			else:
-				velocity += gravity*delta
-				current_estimated_point += velocity*delta
+	
+			current_estimated_point += velocity*delta
 			
+			velocity += gravity*delta
 	
 		points[i] = current_estimated_point
 	
