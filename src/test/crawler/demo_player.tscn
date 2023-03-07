@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/player/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/icon.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/texture/scope_line.png" type="Texture" id=11]
 [ext_resource path="res://src/test/crawler/rope.gd" type="Script" id=12]
 [ext_resource path="res://assets/texture/thin_scope_line.png" type="Texture" id=13]
+[ext_resource path="res://src/test/crawler/hurtbox.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -111,6 +112,14 @@ script = ExtResource( 12 )
 
 [node name="hook" type="Node2D" parent="rope_shooter/rope"]
 unique_name_in_owner = true
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource( 1 )
 
 [connection signal="pre_move" from="." to="jump" method="process"]
 [connection signal="jump" from="jump" to="jump/aim_line" method="hide"]

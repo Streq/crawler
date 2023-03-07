@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/test/ingame_rope_test/box.gd" type="Script" id=1]
+[ext_resource path="res://assets/texture/icon.png" type="Texture" id=2]
+[ext_resource path="res://src/test/ingame_rope_test/shoot_on_sight.gd" type="Script" id=3]
+[ext_resource path="res://src/test/ingame_rope_test/bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/test/ingame_rope_test/sight.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 4, 4 )
+
+[node name="box" type="KinematicBody2D" groups=["pullable"]]
+position = Vector2( 544, 166 )
+collision_layer = 2
+script = ExtResource( 1 )
+gravity = Vector2( 0, 100 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 25 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 36, 30, 8, 8 )
+
+[node name="shoot_on_sight" type="Node2D" parent="."]
+script = ExtResource( 3 )
+BULLET = ExtResource( 4 )
+
+[node name="cooldown" type="Timer" parent="shoot_on_sight"]
+process_mode = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="sight" type="Node2D" parent="shoot_on_sight"]
+script = ExtResource( 5 )
+
+[node name="ray" type="RayCast2D" parent="shoot_on_sight"]
+enabled = true
+
+[node name="alarmed_time" type="Timer" parent="shoot_on_sight"]
+process_mode = 0
+one_shot = true

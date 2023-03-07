@@ -1,5 +1,6 @@
 extends KinematicBody2D
 signal pre_move(delta)
+signal dead()
 onready var input_state: Node = $"%input_state"
 
 export var velocity := Vector2()
@@ -47,3 +48,6 @@ func _physics_process(delta: float) -> void:
 		current_floor_normal += normal
 	is_in_concave_corner = current_floor_normal.x and current_floor_normal.y
 	
+func die():
+	queue_free()
+	emit_signal("dead")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/shader/palette.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/test/crawler/demo_player.tscn" type="PackedScene" id=2]
@@ -7,10 +7,10 @@
 [ext_resource path="res://assets/texture/spikes.png" type="Texture" id=5]
 [ext_resource path="res://src/terrain/kill_zone.gd" type="Script" id=6]
 [ext_resource path="res://src/test/ingame_rope_test/rope_hook.gd" type="Script" id=7]
-[ext_resource path="res://assets/texture/icon.png" type="Texture" id=8]
-[ext_resource path="res://src/test/ingame_rope_test/box.gd" type="Script" id=9]
+[ext_resource path="res://src/test/ingame_rope_test/turret.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/test/ingame_rope_test/rope_test.gd" type="Script" id=12]
 
-[sub_resource type="Image" id=26]
+[sub_resource type="Image" id=29]
 data = {
 "data": PoolByteArray( 252, 252, 252, 255, 188, 188, 188, 255, 255, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -19,19 +19,19 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=19]
+[sub_resource type="ImageTexture" id=27]
 flags = 0
 flags = 0
-image = SubResource( 26 )
+image = SubResource( 29 )
 size = Vector2( 4, 1 )
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=28]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 19 )
+shader_param/palette = SubResource( 27 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -229,10 +229,8 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 4, 4 )
-
 [node name="Node" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -244,7 +242,7 @@ mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
-material = SubResource( 20 )
+material = SubResource( 28 )
 tile_set = SubResource( 17 )
 cell_size = Vector2( 16, 16 )
 collision_mask = 0
@@ -254,13 +252,22 @@ tile_data = PoolIntArray( -589843, 0, 65537, -589842, 0, 65538, -589841, 0, 6553
 [node name="palette_client" parent="TileMap" instance=ExtResource( 4 )]
 index = 1
 
-[node name="demo_player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 457, 149 )
+[node name="demo_player" parent="." groups=["player"] instance=ExtResource( 2 )]
+position = Vector2( 460, 252 )
 gravity = Vector2( 0, 200 )
 speed = 125.0
 
 [node name="Camera2D" type="Camera2D" parent="demo_player"]
 current = true
+
+[node name="rope_hook" type="Node2D" parent="demo_player"]
+position = Vector2( -37, -108 )
+script = ExtResource( 7 )
+dude_path = NodePath("..")
+
+[node name="RayCast2D" type="RayCast2D" parent="demo_player/rope_hook"]
+enabled = true
+collision_mask = 3
 
 [node name="kill_zone" type="Area2D" parent="."]
 collision_mask = 2
@@ -274,25 +281,24 @@ collision_use_parent = true
 format = 1
 tile_data = PoolIntArray( -458745, 0, 0, -458744, 0, 0, -458743, 0, 0, -458742, 0, 0, -393208, 0, 0, -393207, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -196605, 0, 0, -131070, 0, 0, -131069, 0, 0, 196602, 0, 0, 131072, 0, 0, 131073, 0, 0, 262138, 0, 0, 262139, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196620, 0, 0, 196624, 0, 0, 196646, 0, 0, 262147, 0, 0, 262160, 0, 0, 393214, 0, 0, 393215, 0, 0, 458751, 0, 0, 393216, 0, 0, 393232, 0, 0, 458762, 0, 0, 458763, 0, 0, 458768, 0, 0, 524304, 0, 0, 655349, 0, 0, 655350, 0, 0, 655351, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 720885, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 786421, 0, 0, 786422, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1114159, 0, 0, 1507314, 0, 0, 1507315, 0, 0, 1572887, 0, 0, 1572888, 0, 0, 1572889, 0, 0, 1572890, 0, 0, 1572891, 0, 0, 1572895, 0, 0, 1572896, 0, 0, 1572897, 0, 0, 1572898, 0, 0, 1703922, 0, 0, 1703923, 0, 0, 1769467, 0, 0, 1769468, 0, 0, 1769469, 0, 0, 1769470, 0, 0, 1769471, 0, 0, 1703936, 0, 0, 1703937, 0, 0, 1703938, 0, 0, 1703939, 0, 0, 1703940, 0, 0, 1703941, 0, 0, 1703942, 0, 0, 1703943, 0, 0, 1835003, 0, 0, 1769503, 0, 0, 1769504, 0, 0, 1769505, 0, 0, 1769506, 0, 0, 1900532, 0, 0, 1900533, 0, 0, 1900534, 0, 0, 1900535, 0, 0, 1900536, 0, 0, 1900537, 0, 0, 1900538, 0, 0, 1900539, 0, 0, 1835024, 0, 0, 1835025, 0, 0, 1835026, 0, 0, 1835027, 0, 0, 1966068, 0, 0, 1966069, 0, 0, 1966070, 0, 0, 1966071, 0, 0, 1966072, 0, 0, 1966073, 0, 0, 1966074, 0, 0, 1966075, 0, 0, 2097160, 0, 0, 2097161, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2097164, 0, 0 )
 
-[node name="rope_hook" type="Node2D" parent="."]
-position = Vector2( 423, 144 )
-script = ExtResource( 7 )
-dude_path = NodePath("../demo_player")
+[node name="box" parent="." instance=ExtResource( 8 )]
+position = Vector2( 455, 155 )
 
-[node name="RayCast2D" type="RayCast2D" parent="rope_hook"]
-enabled = true
-collision_mask = 3
+[node name="box3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 429, 443 )
 
-[node name="box" type="KinematicBody2D" parent="." groups=["pullable"]]
-position = Vector2( 544, 166 )
-collision_layer = 2
-script = ExtResource( 9 )
-gravity = Vector2( 0, 100 )
+[node name="box4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 700, 298 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
-shape = SubResource( 25 )
+[node name="box5" parent="." instance=ExtResource( 8 )]
+position = Vector2( -89, 316 )
 
-[node name="Sprite" type="Sprite" parent="box"]
-texture = ExtResource( 8 )
-region_enabled = true
-region_rect = Rect2( 36, 30, 8, 8 )
+[node name="box6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 102, 11 )
+rotation = -1.57079
+
+[node name="box2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 364, 283 )
+rotation = -1.57079
+
+[connection signal="dead" from="demo_player" to="." method="_on_demo_player_dead"]
