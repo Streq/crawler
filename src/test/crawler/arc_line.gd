@@ -9,8 +9,9 @@ var points := []
 
 func _physics_process(delta: float) -> void:
 	if !get_parent().can_jump:
-		hide()
-		return
+		modulate.a = 0.25
+	else:
+		modulate.a = 1.0
 	show()
 	update_points()
 

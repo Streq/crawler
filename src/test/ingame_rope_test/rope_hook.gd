@@ -108,7 +108,7 @@ func _input(event: InputEvent) -> void:
 			hooked_on = ray.get_collider()
 			hooked_on_point = hooked_on.to_local(ray.get_collision_point())
 #			global_position = ray.get_collision_point()
-		length = get_actual_length()
+			length = get_actual_length()
 
 func _draw() -> void:
 	if !disabled and is_instance_valid(hooked_on):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/font.png-ccd17c74875decee0f5501cfd78a5340.stex"
+path="res://.import/Prince.png-4677d8e9628c3a3da537d72437166a76.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/font/font.png"
-dest_files=[ "res://.import/font.png-ccd17c74875decee0f5501cfd78a5340.stex" ]
+source_file="res://assets/font/Prince/Prince.png"
+dest_files=[ "res://.import/Prince.png-4677d8e9628c3a3da537d72437166a76.stex" ]
 
 [params]
 

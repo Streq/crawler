@@ -20,5 +20,4 @@ func process(delta):
 		jump()
 
 func _physics_process(delta: float) -> void:
-	if can_jump:
-		estimated_power = min(owner.input_state.aim_dist,shoot_range)/shoot_range
+	estimated_power = min(owner.input_state.aim_dist,shoot_range)/shoot_range
