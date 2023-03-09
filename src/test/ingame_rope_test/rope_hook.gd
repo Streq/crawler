@@ -8,7 +8,9 @@ var length := 100.0
 
 onready var dude : KinematicBody2D = get_node(dude_path) if dude_path else null
 
-export var disabled := false
+export var disabled := false setget set_disabled
+
+export var active := false
 onready var ray: RayCast2D = $RayCast2D
 
 var landed := false
@@ -25,14 +27,23 @@ var hooked_on_point = Vector2()
 onready var hooked_from = get_parent()
 var hooked_from_point = Vector2()
 
+
+func set_disabled(val):
+	disabled = val
+	visible = !disabled
+	set_physics_process(!disabled)
+	set_process(!disabled)
+
 func _ready() -> void:
 	ray.add_exception(dude)
 
 func _physics_process(delta: float) -> void:
-	disabled = !Input.is_action_pressed("B") or !landed or cut or !is_instance_valid(hooked_on)#or dude.is_on_wall()
+	if disabled:
+		return
+	active = !Input.is_action_pressed("B") or !landed or cut or !is_instance_valid(hooked_on)#or dude.is_on_wall()
 	pulling = false
 	update()
-	if disabled:
+	if active:
 		return
 		
 	var pullable = hooked_on.is_in_group("pullable")
@@ -96,6 +107,8 @@ func _physics_process(delta: float) -> void:
 		
 
 func _input(event: InputEvent) -> void:
+	if disabled:
+		return
 	if event.is_action_pressed("B"):
 		cut = false
 		var dist : Vector2 = dude.get_local_mouse_position().normalized()*max_length
@@ -111,7 +124,7 @@ func _input(event: InputEvent) -> void:
 			length = get_actual_length()
 
 func _draw() -> void:
-	if !disabled and is_instance_valid(hooked_on):
+	if !active and is_instance_valid(hooked_on):
 		draw_line(to_local(get_hooked_from_global_position()),to_local(get_hooked_to_global_position()),Color.aquamarine)
 
 

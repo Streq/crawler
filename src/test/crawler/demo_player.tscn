@@ -11,9 +11,9 @@
 [ext_resource path="res://src/test/crawler/aim_line.gd" type="Script" id=9]
 [ext_resource path="res://src/test/crawler/trajectory_line.gd" type="Script" id=10]
 [ext_resource path="res://assets/texture/scope_line.png" type="Texture" id=11]
-[ext_resource path="res://src/test/crawler/rope.gd" type="Script" id=12]
 [ext_resource path="res://assets/texture/thin_scope_line.png" type="Texture" id=13]
 [ext_resource path="res://src/test/crawler/hurtbox.gd" type="Script" id=14]
+[ext_resource path="res://src/test/ingame_rope_test/rope_hook.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -61,6 +61,7 @@ region_enabled = true
 region_rect = Rect2( 36, 30, 8, 8 )
 
 [node name="jump" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource( 6 )
 speed = 200.0
 
@@ -105,14 +106,6 @@ width = 2.0
 default_color = Color( 1, 0.960784, 0, 1 )
 script = ExtResource( 10 )
 
-[node name="rope_shooter" type="Node2D" parent="."]
-
-[node name="rope" type="Node2D" parent="rope_shooter"]
-script = ExtResource( 12 )
-
-[node name="hook" type="Node2D" parent="rope_shooter/rope"]
-unique_name_in_owner = true
-
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
@@ -120,6 +113,16 @@ script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 shape = SubResource( 1 )
+
+[node name="rope" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( -37, -108 )
+script = ExtResource( 15 )
+dude_path = NodePath("..")
+
+[node name="RayCast2D" type="RayCast2D" parent="rope"]
+enabled = true
+collision_mask = 3
 
 [connection signal="pre_move" from="." to="jump" method="process"]
 [connection signal="jump" from="jump" to="jump/aim_line" method="hide"]

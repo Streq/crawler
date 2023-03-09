@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/shader/palette.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/texture/door.png" type="Texture" id=3]
+[ext_resource path="res://src/terrain/next_level_door.gd" type="Script" id=4]
+[ext_resource path="res://src/util/color/palette.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Image" id=33]
+data = {
+"data": PoolByteArray( 255, 255, 255, 255, 71, 148, 0, 255, 27, 49, 0, 255, 0, 0, 0, 255 ),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id=32]
+flags = 0
+flags = 0
+image = SubResource( 33 )
+size = Vector2( 4, 1 )
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/palette_size = 4
+shader_param/offset = 0
+shader_param/blue_index_offset = 0.0
+shader_param/palette = SubResource( 32 )
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 7, 7 )
+
+[node name="next_level_door" type="Area2D"]
+position = Vector2( 400, 184 )
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 26 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="sky" parent="Sprite" instance=ExtResource( 5 )]
+palette = PoolColorArray( 1, 1, 1, 1, 0.278431, 0.580392, 0, 1, 0.105882, 0.192157, 0, 1, 0, 0, 0, 1 )
+material = SubResource( 26 )
+string_val = "[\"ffffffff\",\"ff479400\",\"ff1b3100\",\"ff000000\"]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 30 )

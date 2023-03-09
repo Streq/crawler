@@ -159,7 +159,7 @@ _global_script_class_icons={
 [application]
 
 config/name="crawler"
-run/main_scene="res://src/test/ingame_rope_test/rope_test.tscn"
+run/main_scene="res://src/levels/level0.tscn"
 config/icon="res://assets/texture/icon.png"
 
 [autoload]
@@ -176,6 +176,7 @@ NGIO="*res://src/util/global/newgrounds.io/NGIO.gd"
 Achievements="*res://src/util/global/Achievements/Achievements.tscn"
 GlobalPalette="*res://src/util/color/GlobalPalette.tscn"
 GlobalInputs="res://src/util/global/input/global_inputs.gd"
+LevelCircuit="*res://src/global/Levels/LevelCircuit.tscn"
 
 [display]
 

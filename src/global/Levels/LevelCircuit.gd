@@ -1,7 +1,7 @@
 extends Node
 
 onready var levels = get_children()
-var current_level = -1
+var current_level = 0
 
 func next_level():
 	current_level += 1
