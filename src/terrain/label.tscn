@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/shader/palette.gdshader" type="Shader" id=1]
-[ext_resource path="res://src/util/color/palette.gd" type="Script" id=2]
 [ext_resource path="res://src/util/color/palette.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/font/Prince/prince.res" type="BitmapFont" id=4]
 
-[sub_resource type="Image" id=39]
+[sub_resource type="Image" id=41]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -14,10 +13,10 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=37]
+[sub_resource type="ImageTexture" id=40]
 flags = 0
 flags = 0
-image = SubResource( 39 )
+image = SubResource( 41 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=38]
@@ -26,7 +25,7 @@ shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 37 )
+shader_param/palette = SubResource( 40 )
 
 [sub_resource type="Theme" id=35]
 default_font = ExtResource( 4 )
@@ -38,12 +37,12 @@ margin_top = 128.0
 margin_right = -344.0
 margin_bottom = 180.0
 theme = SubResource( 35 )
+custom_constants/line_spacing = 0
 text = "Wow, that was amazing.
 Let see how well you fare against this block here."
 autowrap = true
 
-[node name="palette" type="Node" parent="." instance=ExtResource( 3 )]
-script = ExtResource( 2 )
+[node name="palette" parent="." instance=ExtResource( 3 )]
 palette = PoolColorArray( 1, 0, 0, 1, 1, 0.74902, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1 )
 material = SubResource( 38 )
 string_val = "[\"ffff0000\",\"ffffbf00\",\"ff000000\",\"ff000000\"]"

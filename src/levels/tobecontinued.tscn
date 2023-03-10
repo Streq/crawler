@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/shader/palette.gdshader" type="Shader" id=1]
 [ext_resource path="res://assets/texture/spikes.png" type="Texture" id=2]
 [ext_resource path="res://src/terrain/kill_zone.gd" type="Script" id=3]
 [ext_resource path="res://assets/font/Prince/prince.res" type="BitmapFont" id=4]
-[ext_resource path="res://src/terrain/next_level_door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/test/crawler/demo_player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/terrain/terrain.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/util/color/palette.tscn" type="PackedScene" id=8]
@@ -100,16 +99,15 @@ color = Color( 0.00784314, 0.0392157, 0.00784314, 1 )
 
 [node name="Label" type="Label" parent="."]
 material = SubResource( 38 )
-margin_left = -288.0
+margin_left = -312.0
 margin_top = 136.0
-margin_right = -120.0
+margin_right = -111.0
 margin_bottom = 177.0
 theme = SubResource( 35 )
 custom_constants/line_spacing = 0
-text = "Training has Begun!!!
-Use your WASD skills
-to get out of this
-room!!"
+text = "Okay this is it man sorry
+more levels coming soon"
+autowrap = true
 
 [node name="palette" parent="Label" instance=ExtResource( 8 )]
 palette = PoolColorArray( 1, 0, 0, 1, 1, 0.74902, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -143,6 +141,3 @@ cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 collision_use_parent = true
 format = 1
-
-[node name="next_level_door" parent="." instance=ExtResource( 5 )]
-position = Vector2( -120, 200 )

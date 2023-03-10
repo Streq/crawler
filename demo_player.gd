@@ -34,23 +34,24 @@ func _physics_process(delta: float) -> void:
 		
 		dir.x = sign(dir.x)
 		dir.y = sign(dir.y)
-		velocity = speed*dir-current_floor_normal*10.0
+		velocity = speed*dir-current_floor_normal*100.0
 		set_facing_dir(dir.dot(-current_floor_normal.tangent()))
-		pivot.global_rotation = (-current_floor_normal.tangent()).angle()
 		
-		if !is_in_concave_corner and corner_handler.is_in_corner():
-			corner_handler.turn_corner()
+		
+	
 			
 	emit_signal("pre_move", delta)
 	
 	velocity = move_and_slide(velocity)
+	update_floor_normal()
+	fix_rotation_to_ground()
+	
+	if is_on_wall() and !is_in_concave_corner and corner_handler.is_in_corner():
+		corner_handler.turn_corner()
+		update_floor_normal()
+		fix_rotation_to_ground()
 	is_on_wall = is_on_wall()
-	current_floor_normal = Vector2()
-	for i in get_slide_count():
-		var collision := get_slide_collision(i)
-		var normal := collision.normal
-#		velocity -= velocity.project(normal)*2.0
-		current_floor_normal += normal
+	
 	var last_wall = world
 	ground = null
 	if get_slide_count():
@@ -71,3 +72,15 @@ func reparent_to_wall(last_wall):
 func die():
 	queue_free()
 	emit_signal("dead")
+
+func update_floor_normal():
+	current_floor_normal = Vector2()
+	for i in get_slide_count():
+		var collision := get_slide_collision(i)
+		var normal := collision.normal
+#		velocity -= velocity.project(normal)*2.0
+		current_floor_normal += normal
+
+func fix_rotation_to_ground():
+	if is_on_wall():
+		pivot.global_rotation = (-current_floor_normal.tangent()).angle()

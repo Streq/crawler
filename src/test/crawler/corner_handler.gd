@@ -39,3 +39,4 @@ func turn_corner():
 
 	pivot.global_rotation = PI/2 + collision_normal.angle()
 	owner.velocity = pivot.transform.xform(Vector2.DOWN)*1000.0
+	owner.move_and_slide(owner.velocity)
