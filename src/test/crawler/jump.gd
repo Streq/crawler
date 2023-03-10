@@ -22,7 +22,8 @@ func jump():
 		return
 	var power := 0.0
 	power = min(owner.input_state.aim_dist,shoot_range)/shoot_range
-	owner.velocity = owner.input_state.aim_dir*speed * power
+	owner.velocity = owner.input_state.aim_dir*speed * power + owner.ground.perceived_velocity
+	owner.reparent_to_wall(owner.world)
 	emit_signal("jump")
 func process(delta):
 	visible = !disabled

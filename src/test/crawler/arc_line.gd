@@ -22,7 +22,10 @@ func update_points():
 	var speed : float = get_parent().speed*get_parent().estimated_power
 	var gravity : Vector2 = owner.gravity
 	var delta = 1.0/Engine.iterations_per_second
-	var velocity : Vector2 = owner.input_state.aim_dir*speed
+	var ground = owner.ground
+	var ground_velocity = ground.perceived_velocity if ground else Vector2()
+	
+	var velocity : Vector2 = owner.input_state.aim_dir*speed+ground_velocity
 	var current_estimated_point := Vector2()
 	
 	var params = Physics2DShapeQueryParameters.new()

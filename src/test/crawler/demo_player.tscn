@@ -46,14 +46,13 @@ alpha_y = 4.0
 unique_name_in_owner = true
 position = Vector2( 0, 4 )
 enabled = true
-cast_to = Vector2( 0, 1 )
+cast_to = Vector2( 0, 8 )
 
 [node name="corner_detect" type="RayCast2D" parent="pivot/corner_handler"]
 unique_name_in_owner = true
-position = Vector2( 0, 5 )
-rotation = 1.5708
+position = Vector2( 0, 12 )
 enabled = true
-cast_to = Vector2( 0, 5 )
+cast_to = Vector2( -5, 0 )
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 texture = ExtResource( 2 )

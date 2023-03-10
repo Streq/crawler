@@ -7,6 +7,8 @@ onready var pivot: Node2D = $"%pivot"
 export var alpha_x := 6.0
 export var alpha_y := 1.0
 
+export var disabled := false
+
 func is_in_corner():
 	no_more_floor_detect.force_raycast_update()
 	if !no_more_floor_detect.is_colliding():
@@ -16,6 +18,8 @@ func is_in_corner():
 
 
 func turn_corner():
+	if disabled:
+		return
 	var collision_normal = corner_detect.get_collision_normal()
 	var collision_point = corner_detect.get_collision_point()
 	
