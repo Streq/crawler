@@ -212,7 +212,7 @@ position = Vector2( -8, 0 )
 curve = SubResource( 63 )
 
 [node name="path_follow" type="PathFollow2D" parent="moving_path"]
-position = Vector2( 136, 208 )
+position = Vector2( 136, 256 )
 rotation = 1.5708
 rotate = false
 cubic_interp = false

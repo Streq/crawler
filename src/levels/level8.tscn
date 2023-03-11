@@ -12,7 +12,7 @@
 [ext_resource path="res://src/player/disable_rope.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/terrain/next_level_door.tscn" type="PackedScene" id=11]
 
-[sub_resource type="Image" id=64]
+[sub_resource type="Image" id=70]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -24,7 +24,7 @@ data = {
 [sub_resource type="ImageTexture" id=65]
 flags = 0
 flags = 0
-image = SubResource( 64 )
+image = SubResource( 70 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=66]
@@ -35,7 +35,7 @@ shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
 shader_param/palette = SubResource( 65 )
 
-[sub_resource type="Image" id=67]
+[sub_resource type="Image" id=71]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -47,7 +47,7 @@ data = {
 [sub_resource type="ImageTexture" id=68]
 flags = 0
 flags = 0
-image = SubResource( 67 )
+image = SubResource( 71 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=69]
@@ -75,7 +75,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 128, 0 ) ]
 }
 
-[sub_resource type="Image" id=70]
+[sub_resource type="Image" id=72]
 data = {
 "data": PoolByteArray( 252, 252, 252, 255, 188, 188, 188, 255, 255, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -87,7 +87,7 @@ data = {
 [sub_resource type="ImageTexture" id=42]
 flags = 0
 flags = 0
-image = SubResource( 70 )
+image = SubResource( 72 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=43]
