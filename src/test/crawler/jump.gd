@@ -1,4 +1,4 @@
-extends Node2D
+extends Skill
 
 export var speed = 100.0
 
@@ -7,29 +7,25 @@ export var shoot_range := 100.0
 
 var estimated_power := 0.0
 export var can_jump := false
-export var disabled := false setget set_disabled
 export var air_jumps := 0
 export var current_air_jumps := 0
 export var jump_power_factor = PoolRealArray([1.0,1.0,1.0])
 
 signal jump()
 
-func set_disabled(val):
-	disabled = val
-	visible = !disabled
-	set_physics_process(!disabled)
-	set_process(!disabled)
+
+func is_available():
+	return !disabled and unlocked
 
 func jump():
-	if disabled: 
+	if !is_available(): 
 		return
 	owner.velocity = get_jump_velocity()
 	owner.reparent_to_wall(owner.world)
 	emit_signal("jump")
 
 func process(delta):
-	visible = !disabled
-	if disabled:
+	if !is_available():
 		return
 	can_jump = owner.is_on_wall() or current_air_jumps > 0
 	if can_jump and owner.input_state.A.is_just_pressed():

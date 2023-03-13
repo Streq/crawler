@@ -10,6 +10,8 @@ onready var root = owner
 
 func initialize():
 	for state in get_children():
+		if !state is State:
+			continue
 		states[state.name] = state
 		state.connect("finish", self, "_change_state")
 		state.root = root

@@ -1,22 +1,28 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/player/player_controller.gd" type="Script" id=1]
 [ext_resource path="res://src/test/crawler/dude.png" type="Texture" id=2]
 [ext_resource path="res://demo_player.gd" type="Script" id=3]
 [ext_resource path="res://src/characters/input_state.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/test/crawler/corner_handler.gd" type="Script" id=5]
-[ext_resource path="res://src/test/crawler/jump.gd" type="Script" id=6]
-[ext_resource path="res://assets/texture/pixel1.png" type="Texture" id=7]
-[ext_resource path="res://src/test/crawler/arc_line.gd" type="Script" id=8]
-[ext_resource path="res://src/test/crawler/aim_line.gd" type="Script" id=9]
-[ext_resource path="res://src/test/crawler/trajectory_line.gd" type="Script" id=10]
-[ext_resource path="res://assets/texture/scope_line.png" type="Texture" id=11]
-[ext_resource path="res://assets/texture/thin_scope_line.png" type="Texture" id=13]
+[ext_resource path="res://src/player/skills/rope.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/player/skills/jump.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/test/crawler/crawl.gd" type="Script" id=8]
+[ext_resource path="res://src/util/state_machine/state_machine.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/test/crawler/hurtbox.gd" type="Script" id=14]
-[ext_resource path="res://src/test/ingame_rope_test/rope_hook.gd" type="Script" id=15]
+[ext_resource path="res://src/test/crawler/idle.gd" type="Script" id=16]
+[ext_resource path="res://src/test/crawler/air.gd" type="Script" id=17]
+[ext_resource path="res://src/test/crawler/walk.gd" type="Script" id=18]
+[ext_resource path="res://src/test/crawler/crawl_walk.gd" type="Script" id=19]
+[ext_resource path="res://src/test/crawler/crawl_idle.gd" type="Script" id=20]
+[ext_resource path="res://src/test/crawler/crawl_turn_corner_concave.gd" type="Script" id=21]
+[ext_resource path="res://src/test/crawler/crawl_turn_corner.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "RESET"
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -339,6 +345,38 @@ tracks/4/keys = {
 collision_layer = 2
 script = ExtResource( 3 )
 
+[node name="state_machine" parent="." instance=ExtResource( 12 )]
+unique_name_in_owner = true
+start_state = "idle"
+
+[node name="idle" type="Node" parent="state_machine"]
+script = ExtResource( 16 )
+animation = "idle_side"
+
+[node name="walk" type="Node" parent="state_machine"]
+script = ExtResource( 18 )
+animation = "walk"
+
+[node name="air" type="Node" parent="state_machine"]
+script = ExtResource( 17 )
+animation = "air"
+
+[node name="crawl_walk" type="Node" parent="state_machine"]
+script = ExtResource( 19 )
+animation = "crawl_walk"
+
+[node name="crawl_idle" type="Node" parent="state_machine"]
+script = ExtResource( 20 )
+animation = "crawl_idle"
+
+[node name="crawl_turn_corner_concave" type="Node" parent="state_machine"]
+script = ExtResource( 21 )
+animation = "crawl_turn_corner_concave"
+
+[node name="crawl_turn_corner" type="Node" parent="state_machine"]
+script = ExtResource( 22 )
+animation = "crawl_turn_corner"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -375,7 +413,7 @@ cast_to = Vector2( -5, 0 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 4
-frame = 7
+frame = 1
 __meta__ = {
 "_aseprite_wizard_config_": {
 "layer": "",
@@ -389,52 +427,6 @@ __meta__ = {
 }
 }
 
-[node name="jump" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource( 6 )
-speed = 200.0
-
-[node name="aim_line" type="Node2D" parent="jump"]
-script = ExtResource( 9 )
-
-[node name="Line2D2" type="Line2D" parent="jump/aim_line"]
-points = PoolVector2Array( 0, 0, 100, 0 )
-width = 20.0
-default_color = Color( 0.470588, 1, 0.541176, 1 )
-texture = ExtResource( 13 )
-texture_mode = 1
-
-[node name="Line2D" type="Line2D" parent="jump/aim_line"]
-points = PoolVector2Array( 0, 0, 0, 0 )
-width = 1.5
-default_color = Color( 0.470588, 1, 0.541176, 1 )
-
-[node name="arc_line" type="Node2D" parent="jump"]
-script = ExtResource( 8 )
-texture = ExtResource( 7 )
-
-[node name="long_line" type="Line2D" parent="jump/arc_line"]
-points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-width = 20.0
-default_color = Color( 1, 1, 1, 1 )
-texture = ExtResource( 11 )
-texture_mode = 1
-script = ExtResource( 10 )
-
-[node name="mid_line" type="Line2D" parent="jump/arc_line"]
-visible = false
-points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-width = 2.0
-default_color = Color( 0.803922, 1, 0, 1 )
-script = ExtResource( 10 )
-
-[node name="short_line" type="Line2D" parent="jump/arc_line"]
-visible = false
-points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-width = 2.0
-default_color = Color( 1, 0.960784, 0, 1 )
-script = ExtResource( 10 )
-
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
@@ -443,20 +435,21 @@ script = ExtResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 shape = SubResource( 1 )
 
-[node name="rope" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2( -37, -108 )
-script = ExtResource( 15 )
-dude_path = NodePath("..")
+[node name="jump" parent="." instance=ExtResource( 7 )]
 
-[node name="RayCast2D" type="RayCast2D" parent="rope"]
-enabled = true
-collision_mask = 3
+[node name="rope" parent="." instance=ExtResource( 6 )]
+
+[node name="stick_to_walls" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="no_stick_move_strategy" type="Node" parent="stick_to_walls"]
+
+[node name="stick_to_walls_move_strategy" type="Node" parent="stick_to_walls"]
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-autoplay = "crawl"
-playback_process_mode = 0
+playback_process_mode = 2
+anims/RESET = SubResource( 7 )
 anims/air = SubResource( 2 )
 anims/crawl = SubResource( 3 )
 anims/idle_front = SubResource( 4 )
@@ -464,5 +457,3 @@ anims/idle_side = SubResource( 5 )
 anims/run = SubResource( 6 )
 
 [connection signal="pre_move" from="." to="jump" method="process"]
-[connection signal="jump" from="jump" to="jump/aim_line" method="hide"]
-[connection signal="jump" from="jump" to="jump/arc_line" method="hide"]

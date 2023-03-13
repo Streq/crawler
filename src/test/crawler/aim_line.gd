@@ -14,7 +14,8 @@ func _physics_process(delta: float) -> void:
 func update_points():
 	line.points[0] = Vector2()
 	var shoot_range = get_parent().shoot_range
-	var power = min(owner.input_state.aim_dist, shoot_range)
+	var input = get_wearer().input_state
+	var power = min(input.aim_dist, shoot_range)
 	
 	var ratio = power/shoot_range
 	if ratio <0.5:
@@ -22,5 +23,8 @@ func update_points():
 	else:
 		line.default_color = Color.yellow.linear_interpolate(Color.red,(ratio-0.5)*2)
 	
-	line.points[1] = owner.input_state.aim_dir*power
-	line2.points[1] = owner.input_state.aim_dir*shoot_range
+	line.points[1] = input.aim_dir*power
+	line2.points[1] = input.aim_dir*shoot_range
+
+func get_wearer():
+	return owner.get_wearer()

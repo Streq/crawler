@@ -1,7 +1,9 @@
 extends KinematicBody2D
 signal pre_move(delta)
 signal dead()
-onready var input_state: Node = $"%input_state"
+onready var input_state: InputState = $"%input_state"
+onready var animation_player: AnimationPlayer = $"%animation_player"
+onready var state_machine: Node = $"%state_machine"
 
 export var velocity := Vector2()
 export var gravity := Vector2()
@@ -25,19 +27,13 @@ func set_facing_dir(val):
 			pivot.scale.x = facing_dir
 var is_on_wall = false
 func _physics_process(delta: float) -> void:
+	
+	
 	velocity += gravity*delta
-	if is_on_wall:
-		var dir : Vector2 = input_state.dir
-		if dir.dot(current_floor_normal)>0:
-			dir -= dir.project(current_floor_normal)
-#		print(dir,current_floor_normal)
-		
-		dir.x = sign(dir.x)
-		dir.y = sign(dir.y)
-		velocity = speed*dir-current_floor_normal*100.0
-		set_facing_dir(dir.dot(-current_floor_normal.tangent()))
-		
-		
+	animation_player.advance(delta)
+	state_machine.physics_update(delta)
+	
+	
 	
 			
 	emit_signal("pre_move", delta)
@@ -84,3 +80,9 @@ func update_floor_normal():
 func fix_rotation_to_ground():
 	if is_on_wall():
 		pivot.global_rotation = (-current_floor_normal.tangent()).angle()
+
+
+func _ready() -> void:
+	state_machine.initialize()
+func stick_to_wall():
+	velocity -= current_floor_normal*100.0

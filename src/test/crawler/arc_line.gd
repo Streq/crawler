@@ -20,9 +20,10 @@ func _ready() -> void:
 
 func update_points():
 	var speed : float = get_parent().speed*get_parent().get_power()
-	var gravity : Vector2 = owner.gravity
+	var wearer = get_wearer()
+	var gravity : Vector2 = wearer.gravity
 	var delta = 1.0/Engine.iterations_per_second
-	var ground = owner.ground
+	var ground = wearer.ground
 	var ground_velocity = ground.perceived_velocity if ground else Vector2()
 	
 	var velocity : Vector2 =get_parent().get_jump_velocity()
@@ -30,7 +31,7 @@ func update_points():
 	
 	var params = Physics2DShapeQueryParameters.new()
 	params.collision_layer = 1
-	params.shape_rid = owner.shape_owner_get_shape(0,0).get_rid()
+	params.shape_rid = wearer.shape_owner_get_shape(0,0).get_rid()
 	params.collide_with_areas = true
 	var done = false
 	for i in point_count:
@@ -51,3 +52,5 @@ func update_points():
 
 	
 	
+func get_wearer():
+	return owner.get_wearer()

@@ -1,4 +1,4 @@
-extends Node2D
+extends Skill
 
 
 export var dude_path : NodePath
@@ -8,7 +8,7 @@ var length := 100.0
 
 onready var dude : KinematicBody2D = get_node(dude_path) if dude_path else null
 
-export var disabled := false setget set_disabled
+
 
 export var active := false
 onready var ray: RayCast2D = $RayCast2D
@@ -27,18 +27,12 @@ var hooked_on_point = Vector2()
 onready var hooked_from = get_parent()
 var hooked_from_point = Vector2()
 
-
-func set_disabled(val):
-	disabled = val
-	visible = !disabled
-	set_physics_process(!disabled)
-	set_process(!disabled)
-
+	
 func _ready() -> void:
 	ray.add_exception(dude)
 
 func _physics_process(delta: float) -> void:
-	if disabled:
+	if !is_available():
 		return
 	active = !Input.is_action_pressed("B") or !landed or cut or !is_instance_valid(hooked_on)#or dude.is_on_wall()
 	pulling = false
@@ -107,7 +101,7 @@ func _physics_process(delta: float) -> void:
 		
 
 func _input(event: InputEvent) -> void:
-	if disabled:
+	if !is_available():
 		return
 	if event.is_action_pressed("B"):
 		cut = false

@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/test/crawler/arc_line.gd" type="Script" id=1]
+[ext_resource path="res://src/test/crawler/aim_line.gd" type="Script" id=2]
+[ext_resource path="res://assets/texture/thin_scope_line.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/pixel1.png" type="Texture" id=4]
+[ext_resource path="res://src/test/crawler/jump.gd" type="Script" id=5]
+[ext_resource path="res://src/test/crawler/trajectory_line.gd" type="Script" id=6]
+[ext_resource path="res://assets/texture/scope_line.png" type="Texture" id=7]
+
+[node name="jump" type="Node2D"]
+unique_name_in_owner = true
+script = ExtResource( 5 )
+speed = 200.0
+
+[node name="aim_line" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Line2D2" type="Line2D" parent="aim_line"]
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 20.0
+default_color = Color( 0.470588, 1, 0.541176, 1 )
+texture = ExtResource( 3 )
+texture_mode = 1
+
+[node name="Line2D" type="Line2D" parent="aim_line"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 1.5
+default_color = Color( 0.470588, 1, 0.541176, 1 )
+
+[node name="arc_line" type="Node2D" parent="."]
+script = ExtResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="long_line" type="Line2D" parent="arc_line"]
+points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 7 )
+texture_mode = 1
+script = ExtResource( 6 )
+
+[node name="mid_line" type="Line2D" parent="arc_line"]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0.803922, 1, 0, 1 )
+script = ExtResource( 6 )
+
+[node name="short_line" type="Line2D" parent="arc_line"]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 1, 0.960784, 0, 1 )
+script = ExtResource( 6 )
+
+[connection signal="jump" from="." to="aim_line" method="hide"]
+[connection signal="jump" from="." to="arc_line" method="hide"]
