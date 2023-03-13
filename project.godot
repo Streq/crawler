@@ -182,8 +182,8 @@ LevelCircuit="*res://src/global/Levels/LevelCircuit.tscn"
 
 window/size/width=512
 window/size/height=288
-window/size/test_width=1024
-window/size/test_height=576
+window/size/test_width=512
+window/size/test_height=288
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
