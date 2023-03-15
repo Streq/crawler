@@ -11,7 +11,7 @@
 [ext_resource path="res://src/levels/disable_jump.gd" type="Script" id=9]
 [ext_resource path="res://src/player/disable_rope.tscn" type="PackedScene" id=10]
 
-[sub_resource type="Image" id=46]
+[sub_resource type="Image" id=44]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -20,10 +20,10 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=45]
+[sub_resource type="ImageTexture" id=40]
 flags = 0
 flags = 0
-image = SubResource( 46 )
+image = SubResource( 44 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=38]
@@ -32,12 +32,12 @@ shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 45 )
+shader_param/palette = SubResource( 40 )
 
 [sub_resource type="Theme" id=35]
 default_font = ExtResource( 4 )
 
-[sub_resource type="Image" id=47]
+[sub_resource type="Image" id=45]
 data = {
 "data": PoolByteArray( 252, 252, 252, 255, 188, 188, 188, 255, 255, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -49,7 +49,7 @@ data = {
 [sub_resource type="ImageTexture" id=42]
 flags = 0
 flags = 0
-image = SubResource( 47 )
+image = SubResource( 45 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=43]

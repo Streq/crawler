@@ -12,7 +12,7 @@ extents = Vector2( 4, 4 )
 [sub_resource type="ViewportTexture" id=26]
 viewport_path = NodePath("end_on_sight/sight/Viewport")
 
-[node name="box" type="KinematicBody2D" groups=["pullable"]]
+[node name="box" type="KinematicBody2D"]
 position = Vector2( 544, 166 )
 collision_layer = 2
 script = ExtResource( 1 )

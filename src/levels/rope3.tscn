@@ -127,7 +127,7 @@ margin_left = -136.0
 margin_top = 400.0
 margin_right = -16.0
 margin_bottom = 448.0
-text = "Fun fact, hold shift to reel the rope"
+text = "Fun fact, while using the rope, hold shift to reel it in"
 
 [node name="Label2" parent="." instance=ExtResource( 6 )]
 material = SubResource( 69 )
