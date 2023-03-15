@@ -31,36 +31,15 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	velocity += gravity*delta
 	animation_player.advance(delta)
 	state_machine.physics_update(delta)
 	
 	
 	
-	stick_to_wall()
-	emit_signal("pre_move", delta)
-	
-	velocity = move_and_slide(velocity)
-	update_floor_normal()
-	fix_rotation_to_ground()
-	
-	if is_on_wall() and !is_in_concave_corner and corner_handler.is_in_corner():
-		corner_handler.turn_corner()
-		update_floor_normal()
-		fix_rotation_to_ground()
-	is_on_wall = is_on_wall()
-	
-	var last_wall = world
-	ground = null
-	if get_slide_count():
-		last_wall = get_slide_collision(get_slide_count()-1).collider
-		ground = last_wall
+	premove(delta)
+	move(delta)
+	postmove(delta)
 
-	is_in_concave_corner = current_floor_normal.x and current_floor_normal.y
-	
-	if last_wall != get_parent():
-		call_deferred("reparent_to_wall",last_wall)
-		
 
 func reparent_to_wall(last_wall):
 	if last_wall != get_parent():
@@ -80,11 +59,20 @@ func update_floor_normal():
 		current_floor_normal += normal
 
 func fix_rotation_to_ground():
-	if is_on_wall():
+	if is_on_wall:
 		pivot.global_rotation = (-current_floor_normal.tangent()).angle()
 
 
 func _ready() -> void:
 	state_machine.initialize()
-func stick_to_wall():
-	velocity -= current_floor_normal*100.0
+	move_strategy.initialize()
+func premove(delta):
+	move_strategy.current.premove(delta)
+	
+	emit_signal("pre_move", delta)
+	
+func move(delta):
+	move_strategy.current.move(delta)
+
+func postmove(delta):
+	move_strategy.current.postmove(delta)

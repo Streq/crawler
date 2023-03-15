@@ -6,7 +6,7 @@ func _enter(params) -> void:
 	stick_to_wall.enabled = false
 
 func _physics_update(delta):
-	if root.is_on_wall():
+	if root.is_on_wall:
 		root.velocity *= 1.0-delta*5.0
 		
 	root.velocity += root.gravity*delta

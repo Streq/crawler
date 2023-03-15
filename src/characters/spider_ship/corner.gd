@@ -33,7 +33,7 @@ func _enter(params):
 	
 func _physics_update(delta):
 	
-	if !root.is_on_wall():
+	if !root.is_on_wall:
 		goto("air")
 		return
 		

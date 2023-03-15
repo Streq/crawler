@@ -27,7 +27,7 @@ func jump():
 func process(delta):
 	if !is_available():
 		return
-	can_jump = owner.is_on_wall() or current_air_jumps > 0
+	can_jump = (owner.is_on_wall or current_air_jumps > 0) and owner.current_floor_normal.dot(owner.input_state.aim_dir)>0.0
 	if can_jump and owner.input_state.A.is_just_pressed():
 		jump()
 		if !owner.is_on_wall:
@@ -38,11 +38,12 @@ func get_inertia():
 	return owner.ground.perceived_velocity if owner.ground else Vector2()
 
 func _physics_process(delta: float) -> void:
-	if owner.is_on_wall():
+	if owner.is_on_wall:
 		current_air_jumps = air_jumps
 
 func get_power()->float:
 	return min(owner.input_state.aim_dist,shoot_range)/shoot_range*jump_power_factor[air_jumps-current_air_jumps]
 
 func get_jump_velocity()->float:
+	
 	return owner.input_state.aim_dir*speed * get_power() + get_inertia()

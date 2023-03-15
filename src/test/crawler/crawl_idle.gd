@@ -24,3 +24,7 @@ func _physics_update(delta: float):
 		goto("crawl_walk")
 		return
 			
+
+	if !root.move_strategy.current.is_stick():
+		goto("idle")
+		return

@@ -22,3 +22,6 @@ func _physics_update(delta: float):
 		root.set_facing_dir(dir.dot(-root.current_floor_normal.tangent()))
 		goto("walk")
 		return
+	if root.move_strategy.current.is_stick():
+		goto("crawl_idle")
+		return

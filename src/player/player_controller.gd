@@ -16,3 +16,5 @@ func _physics_process(delta: float) -> void:
 	state.dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	state.A.pressed = Input.is_action_pressed("A")
 	state.B.pressed = Input.is_action_pressed("B")
+	state.C.pressed = Input.is_action_pressed("C")
+	state.D.pressed = Input.is_action_pressed("D")

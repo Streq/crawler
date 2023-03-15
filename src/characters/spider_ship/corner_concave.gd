@@ -13,7 +13,7 @@ func _physics_update(delta):
 #	if root.animation_player.is_playing():
 #		return
 	
-	if !root.is_on_wall():
+	if !root.is_on_wall:
 		goto("air")
 		return
 		
