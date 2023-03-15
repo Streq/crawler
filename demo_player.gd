@@ -15,6 +15,7 @@ onready var corner_handler: Node2D = $"%corner_handler"
 onready var pivot: Node2D = $"%pivot"
 
 onready var world : Node2D = get_parent()
+onready var move_strategy: Node = $"%move_strategy"
 
 var ground = null
 
@@ -29,13 +30,14 @@ var is_on_wall = false
 func _physics_process(delta: float) -> void:
 	
 	
+	
 	velocity += gravity*delta
 	animation_player.advance(delta)
 	state_machine.physics_update(delta)
 	
 	
 	
-			
+	stick_to_wall()
 	emit_signal("pre_move", delta)
 	
 	velocity = move_and_slide(velocity)

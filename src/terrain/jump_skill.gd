@@ -3,7 +3,7 @@ extends Area2D
 
 func _on_body_entered(body : Node):
 	if body.is_in_group("player"):
-		body.get_node("%jump").disabled = false
+		body.get_node("%jump").unlocked = true
 		queue_free()
 
 func _ready() -> void:

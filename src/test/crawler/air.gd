@@ -7,4 +7,8 @@ func _enter(params):
 	rope.disabled=false
 
 func _physics_update(delta: float):
-	pass
+	if root.is_on_wall:
+		goto("crawl_idle")
+		return
+	root.pivot.global_rotation = 0
+	root.set_facing_dir(root.velocity.x)

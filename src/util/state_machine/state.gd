@@ -17,75 +17,75 @@ signal physics_updated(delta)
 
 var root
 
-func enter(params):
+func enter(params) -> void:
 	_enter(params)
 	emit_signal("enter",params)
 	emit_signal("entered")
-func suspend():
+func suspend() -> void:
 	_suspend()
 	emit_signal("suspended")
-func awaken():
+func awaken() -> void:
 	_awaken()
 	emit_signal("awakened")
-func exit():
+func exit() -> void:
 	_exit()
 	emit_signal("exited")
-func update(delta: float):
+func update(delta: float) -> void:
 	_update(delta)
 	emit_signal("updated", delta)
-func physics_update(delta: float):
+func physics_update(delta: float) -> void:
 	_physics_update(delta)
 	emit_signal("physics_updated", delta)
 
 #OVERRIDABLE
 
 # Initialize the state. E.g. change the animation
-func _enter(params):
+func _enter(params) -> void:
 	return
 
 # Clean up the state. Reinitialize values like a timer
-func _exit():
+func _exit() -> void:
 	return
 	
 # Awake the state from suspension. E.g. Readd nodes to tree
-func _awaken():
+func _awaken() -> void:
 	return
 
 # Suspend the state. E.g. Remove nodes
-func _suspend():
+func _suspend() -> void:
 	return
 
 # Called during _process
-func _update(delta: float):
+func _update(delta: float) -> void:
 	return
 
 # Called during _physics_process
-func _physics_update(delta: float):
+func _physics_update(delta: float) -> void:
 	return
 
 # Called during _input
-func _handle_input(event: InputEvent):
+func _handle_input(event: InputEvent) -> void:
 	return
 
 
 #UTILS
 
-func goto(state: String):
+func goto(state: String) -> void:
 	emit_signal("finish", state, null)
 
-func goto_args(state: String, args: Array):
+func goto_args(state: String, args: Array) -> void:
 	emit_signal("finish", state, args)
 
-func push(state: String):
+func push(state: String) -> void:
 	emit_signal("push", state, null)
 
-func push_args(state: String, args: Array):
+func push_args(state: String, args: Array) -> void:
 	emit_signal("push", state, args)
 
-func switch(state: String):
+func switch(state: String) -> void:
 	emit_signal("switch", state, null)
 
-func switch_args(state: String, args: Array):
+func switch_args(state: String, args: Array) -> void:
 	emit_signal("switch", state, args)
 
 func pop():
