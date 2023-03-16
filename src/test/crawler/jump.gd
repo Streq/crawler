@@ -61,5 +61,5 @@ func get_jump_velocity()->float:
 	if bouncy_wall:
 		power = 1.0
 		if floor_normal.dot(jump_dir)<0.0:
-			jump_dir = jump_dir.bounce(floor_normal)
+			jump_dir = jump_dir.bounce(floor_normal).normalized()
 	return jump_dir*speed * power + get_inertia()
