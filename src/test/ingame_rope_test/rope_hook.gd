@@ -110,7 +110,7 @@ func _input(event: InputEvent) -> void:
 		ray.global_position = get_hooked_from_global_position()
 		ray.force_raycast_update()
 		
-		landed = ray.is_colliding()
+		landed = ray.is_colliding() and !"no_grab" in ray.get_collider()
 		if landed:
 			hooked_on = ray.get_collider()
 			hooked_on_point = hooked_on.to_local(ray.get_collision_point())

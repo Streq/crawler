@@ -5,7 +5,7 @@
 [ext_resource path="res://src/util/color/palette_client.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/terrain/terrain.gd" type="Script" id=4]
 
-[sub_resource type="Image" id=47]
+[sub_resource type="Image" id=50]
 data = {
 "data": PoolByteArray( 252, 252, 252, 255, 188, 188, 188, 255, 255, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -14,19 +14,19 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=42]
+[sub_resource type="ImageTexture" id=2]
 flags = 0
 flags = 0
-image = SubResource( 47 )
+image = SubResource( 50 )
 size = Vector2( 4, 1 )
 
-[sub_resource type="ShaderMaterial" id=43]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 42 )
+shader_param/palette = SubResource( 2 )
 
 [sub_resource type="OccluderPolygon2D" id=28]
 polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -79,10 +79,10 @@ polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=48]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=49]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
@@ -157,13 +157,13 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 48 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 49 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 0 ),
@@ -248,7 +248,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [node name="TileMap" type="TileMap"]
 light_mask = 2
-material = SubResource( 43 )
+material = SubResource( 3 )
 tile_set = SubResource( 17 )
 cell_size = Vector2( 16, 16 )
 collision_mask = 0

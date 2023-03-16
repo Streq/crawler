@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	premove(delta)
 	move(delta)
 	postmove(delta)
-
+	
 
 func reparent_to_wall(last_wall):
 	if last_wall != get_parent():
