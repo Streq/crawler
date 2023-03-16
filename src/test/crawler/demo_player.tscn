@@ -1,7 +1,7 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/player/player_controller.gd" type="Script" id=1]
-[ext_resource path="res://src/test/crawler/dude.png" type="Texture" id=2]
+[ext_resource path="res://src/levels/Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://demo_player.gd" type="Script" id=3]
 [ext_resource path="res://src/characters/input_state.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/test/crawler/corner_handler.gd" type="Script" id=5]
@@ -12,7 +12,6 @@
 [ext_resource path="res://src/util/state_machine/state_machine.gd" type="Script" id=10]
 [ext_resource path="res://src/test/crawler/no_stick_strategy.gd" type="Script" id=11]
 [ext_resource path="res://src/util/state_machine/state_machine.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/test/crawler/dude.png" type="Texture" id=13]
 [ext_resource path="res://src/test/crawler/hurtbox.gd" type="Script" id=14]
 [ext_resource path="res://src/test/crawler/dude.png" type="Texture" id=15]
 [ext_resource path="res://src/test/crawler/idle.gd" type="Script" id=16]
@@ -41,7 +40,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -168,7 +167,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -232,7 +231,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -295,7 +294,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -358,7 +357,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -422,7 +421,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -486,7 +485,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Sprite:hframes")
@@ -617,7 +616,7 @@ enabled = true
 cast_to = Vector2( -5, 0 )
 
 [node name="Sprite" type="Sprite" parent="pivot"]
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 hframes = 4
 vframes = 4
 frame = 1
@@ -660,5 +659,9 @@ anims/idle_front = SubResource( 4 )
 anims/idle_side = SubResource( 5 )
 anims/run = SubResource( 6 )
 anims/walk = SubResource( 10 )
+
+[node name="camera" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 2 )
 
 [connection signal="pre_move" from="." to="jump" method="process"]

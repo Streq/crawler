@@ -121,9 +121,6 @@ position = Vector2( -296, 204 )
 gravity = Vector2( 0, 200 )
 speed = 125.0
 
-[node name="Camera2D" type="Camera2D" parent="demo_player"]
-current = true
-
 [node name="kill_zone" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource( 3 )

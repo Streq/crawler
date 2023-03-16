@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/shader/palette.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/terrain/kill_zone.gd" type="Script" id=2]
@@ -8,11 +8,10 @@
 [ext_resource path="res://src/test/crawler/demo_player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/terrain/terrain.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/terrain/label.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/player/disable_rope.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/terrain/next_level_door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/test/ingame_rope_test/turret.tscn" type="PackedScene" id=12]
 
-[sub_resource type="Image" id=70]
+[sub_resource type="Image" id=54]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -21,21 +20,21 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=65]
+[sub_resource type="ImageTexture" id=55]
 flags = 0
 flags = 0
-image = SubResource( 70 )
+image = SubResource( 54 )
 size = Vector2( 4, 1 )
 
-[sub_resource type="ShaderMaterial" id=66]
+[sub_resource type="ShaderMaterial" id=56]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 65 )
+shader_param/palette = SubResource( 55 )
 
-[sub_resource type="Image" id=71]
+[sub_resource type="Image" id=57]
 data = {
 "data": PoolByteArray( 255, 0, 0, 255, 255, 191, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -44,19 +43,19 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=68]
+[sub_resource type="ImageTexture" id=58]
 flags = 0
 flags = 0
-image = SubResource( 71 )
+image = SubResource( 57 )
 size = Vector2( 4, 1 )
 
-[sub_resource type="ShaderMaterial" id=69]
+[sub_resource type="ShaderMaterial" id=59]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/palette_size = 4
 shader_param/offset = 0
 shader_param/blue_index_offset = 0.0
-shader_param/palette = SubResource( 68 )
+shader_param/palette = SubResource( 58 )
 
 [sub_resource type="Animation" id=53]
 resource_name = "play"
@@ -75,7 +74,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 128, 0 ) ]
 }
 
-[sub_resource type="Image" id=72]
+[sub_resource type="Image" id=60]
 data = {
 "data": PoolByteArray( 252, 252, 252, 255, 188, 188, 188, 255, 255, 0, 0, 255, 0, 0, 0, 255 ),
 "format": "RGBA8",
@@ -87,7 +86,7 @@ data = {
 [sub_resource type="ImageTexture" id=42]
 flags = 0
 flags = 0
-image = SubResource( 72 )
+image = SubResource( 60 )
 size = Vector2( 4, 1 )
 
 [sub_resource type="ShaderMaterial" id=43]
@@ -137,7 +136,7 @@ mouse_filter = 2
 color = Color( 0.00784314, 0.0392157, 0.00784314, 1 )
 
 [node name="Label" parent="." instance=ExtResource( 8 )]
-material = SubResource( 66 )
+material = SubResource( 56 )
 margin_left = -104.0
 margin_top = 200.0
 margin_right = 32.0
@@ -145,7 +144,7 @@ margin_bottom = 230.0
 text = "If cameras see you it¡'s game over"
 
 [node name="Label2" parent="." instance=ExtResource( 8 )]
-material = SubResource( 69 )
+material = SubResource( 59 )
 margin_left = -256.0
 margin_top = 104.0
 margin_right = -160.0
@@ -174,11 +173,6 @@ collision_use_kinematic = true
 position = Vector2( -104, 264 )
 gravity = Vector2( 0, 200 )
 speed = 125.0
-
-[node name="Camera2D" type="Camera2D" parent="demo_player"]
-current = true
-
-[node name="disable_rope" parent="demo_player" instance=ExtResource( 10 )]
 
 [node name="TileMap" parent="." instance=ExtResource( 7 )]
 material = SubResource( 43 )

@@ -142,9 +142,6 @@ position = Vector2( -544, 204 )
 gravity = Vector2( 0, 200 )
 speed = 125.0
 
-[node name="Camera2D" type="Camera2D" parent="demo_player"]
-current = true
-
 [node name="disable_jump" type="Node" parent="demo_player"]
 script = ExtResource( 8 )
 

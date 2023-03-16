@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/test/ingame_rope_test/box.gd" type="Script" id=1]
-[ext_resource path="res://assets/texture/icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/camera.png" type="Texture" id=2]
 [ext_resource path="res://src/test/ingame_rope_test/end_on_sight.gd" type="Script" id=3]
 [ext_resource path="res://src/test/ingame_rope_test/sight.gd" type="Script" id=5]
 [ext_resource path="res://src/test/ingame_rope_test/view_renderer.gd" type="Script" id=6]
@@ -13,8 +13,8 @@ extents = Vector2( 4, 4 )
 viewport_path = NodePath("end_on_sight/sight/Viewport")
 
 [node name="box" type="KinematicBody2D"]
-position = Vector2( 544, 166 )
-collision_layer = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 1 )
 gravity = Vector2( 0, 100 )
 
@@ -23,8 +23,6 @@ shape = SubResource( 25 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 36, 30, 8, 8 )
 
 [node name="end_on_sight" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -63,6 +61,7 @@ shadow_item_cull_mask = 3
 
 [node name="ray" type="RayCast2D" parent="end_on_sight"]
 enabled = true
+cast_to = Vector2( 50, 0 )
 
 [node name="alarmed_time" type="Timer" parent="end_on_sight"]
 process_mode = 0
